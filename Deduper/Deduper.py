@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     total = 0
     for list in dupes:
-        total += (len(list)-1)
+        total += (len(list))
 
     print str(total) + " dupes found in " + str(len(dupes)) + " sets in " + str(time_taken)
     
@@ -133,33 +133,3 @@ if __name__ == '__main__':
         for item in list:
             print item
         print ""
-
-
-
-    #start_time = time.time()
-    #files = getFilepathList(path)
-    #time_taken = time.time() - start_time
-    #print str(len(files)) +  " files found in " + str(time_taken)
-
-    #start_time = time.time()
-    #hashlist = []
-    #for file in files:
-    #    hf = hashedfile.hashedfile(file)
-    #    hashlist.append(hf)
-
-    #time_taken = time.time() - start_time
-    #print "files hashed in " + str(time_taken)
-
-    #start_time = time.time()
-    #dupes = getdupes(hashlist)
-    #time_taken = time.time() - start_time
-    #print "duplicates found in " + str(time_taken)
-
-    #print "duplicates found at:"
-    #for d in dupes:
-    #    print d[0]
-    #    print d[1]
-    #    print ""
-
-    
-
