@@ -32,11 +32,11 @@ def filterlist(items):
     """given a list of items return either an empty list or a list of lists of duplicates"""
     returnlist = []
     list = items
-    newlist = []
 
     while len(list) > 0:
         checkItem = list.pop()
         dlist = [checkItem]
+        newlist = []
         for i in list:
             if checkItem.deep_eq(i):
                 dlist.append(i)
@@ -45,6 +45,7 @@ def filterlist(items):
         list = newlist
         if len(dlist) > 1:
             returnlist.append(dlist)
+
     return returnlist
 
 
