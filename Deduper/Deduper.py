@@ -5,13 +5,13 @@ import os
 import time
 
 def processFiles(folder):
-    """given a starting folder process all of the data in the folder into a 
+    """given a starting folder process all of the data in the folder into a
     dict of files keyed on the file hashes. This makes finding dupes with more than
     one value faster"""
     d = dict() #key = hash, data = list of hashedfile
 
     trail = os.walk(folder)
-    
+
     for tri in trail:
         dir = tri[0]
         files = tri[2]
@@ -26,7 +26,7 @@ def processFiles(folder):
             else:
                 d[hf.hashVal] = [hf]
     return d
-            
+
 
 def filterlist(items):
     """given a list of items return either an empty list or a list of lists of duplicates"""
@@ -69,7 +69,7 @@ def getFilepathList(folder):
     and return a list of the path names."""
 
     filepaths = []
-    
+
     trail = os.walk(folder)
     for tripple in trail:
         dir = tripple[0]
@@ -95,6 +95,7 @@ def getdupes(hl):
             if hl[i].deep_eq(hl[i+1]):
                 d.append((hl[i], hl[i+1]))
                 duplicates += 1
+                print "found dupe, total is:", duplicates
 
     print "number of hash collisions: " + str(hashcollisions)
     print "number of duplicates: " + str(duplicates)
@@ -103,21 +104,20 @@ def getdupes(hl):
 
 
 if __name__ == '__main__':
-    
+
     path_is_valid = False
     while not path_is_valid:
         path = raw_input("Please enter the path to the folder to dedupe: ")
         if os.path.isdir(path):
            path_is_valid = True
-        else: 
+        else:
            print "please enter a valid directory path"
-    
+
     start_time = time.time()
     filemap = processFiles(path)
     time_taken = time.time() - start_time
-    print "files processed in " + str(time_taken)
-    
-    print "starting dupe search"
+    print len(filemap), "files processed in ", time_taken
+
     start_time = time.time()
     dupes = dictGetDupes(filemap)
     time_taken = time.time() - start_time
@@ -127,7 +127,7 @@ if __name__ == '__main__':
         total += (len(list))
 
     print str(total) + " dupes found in " + str(len(dupes)) + " sets in " + str(time_taken)
-    
+
     raw_input("Press any key to print the duplicates.")
     print ""
     for list in dupes:

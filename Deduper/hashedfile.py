@@ -11,14 +11,10 @@ class hashedfile:
     def __init__(self, filepath):
         """given a filepath create and return a file object for that file.
             this does the hashing operation and is where the data is saved."""
-        
+
         self.filepath = filepath
         self.filesize = os.path.getsize(filepath)
-        
-        with io.open(filepath, 'rb') as file:
-            data = file.read(self.BUFSIZE)
-
-        self.hashVal = hashlib.md5(data).hexdigest()
+        self.hashVal = self.filesize
 
     def __str__(self):
         return self.filepath
@@ -31,6 +27,12 @@ class hashedfile:
 
     def __ne__(self, other):
         return not self.__eq__(self, other)
+
+    def calc_hash(self):
+        with io.open(filepath, 'rb') as file:
+            data = file.read(self.BUFSIZE)
+
+        self.hashVal = hashlib.md5(data).hexdigest()
 
     def deep_eq(self, other):
         result = False
